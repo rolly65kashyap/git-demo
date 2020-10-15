@@ -1,0 +1,1029 @@
+*********************************REACT(ZERO TO MASTERY)************************
+
+React can be used anywhere(VR, Mobile Apps, etc) which has views.
+We can build small little components, which we can reuse, in other projects.
+
+Virtual DOM is a JS Object. This JS Object, describes our current state of website. We give that object o React & that React BOT, will paint the picture(design 
+the website) in the most optimum way possible. React underhood just changes the View of the website. 
+There are so may tools that work with React, npm, node, Babel, ReactiRouter, Webpack, etc. 
+
+#################################################################
+ROBOFRIENDS APP:
+create-react-app 1:
+
+We will be creating ROBOFRIENDS APP.
+Open cmd in the path: C:\Users\Rolly Kashyap\Documents\Work\Udemy\Zero to Mastery\React>
+We will create a Project Floder. In it, we can install react(using npm), but we have a tool, using which we can create react app with all our files already in 
+place. It's called "create-react-app". This tool is a global package that can be installed from npm and it creates a starter package that contains webpack,
+babel(so we can use the latest JS features), lintin, debugging.
+
+To install create-react-app:
+>npm install -g create-react-app
+
+To create a react app:
+>create-react-app robofriends
+
+Now we will open robofriends in sublime:
+1. In package.json folder, we have dependepcies: "react", "react-dom", "react-scripts"
+Bunch of scripts have already been created for us: "start", "build", "test", "eject"
+All of the scripts use the "react-scripts". It does everything for us. It uses the latest of everything.
+eject can be used if we want to customize the React app by our own.  
+>npm start  	#starts the server, on our localhost, we will have a sample react app
+
+2. README.md: this will be displayed on github, in the project folder
+
+3. package-lock.json: it is generated automatically by package.json. It makes sure, that the versions of the dependencies are locked.
+
+4. .gitignore: It is a dot file. Before we run the git, and push the file on github, it checks this dot file and if it sees anything in the file that it should 
+not include, then it automatically says ignores those files. 
+Eg: /node-modules, /coverage, etc.
+
+5. node_modules: It contains whatever is needed and it is created automatically by React.
+
+6. public: In here, we have index.html, manifest.json(it is a new shortcut that allows people to dwnld icons in their system), favicon.ico(the little icon of 
+React, that shows in the title bar) etc.
+
+7. src: This is where, everything related to React happens. 
+	index.js is the main script file. 
+		ReactDOM.render(<App />, document.getElementById('root'));		#<App /> is getting displayed on the body of React. We can render anything.
+		We can change it to: ReactDOM.render(<h1>Hello World</h1>, document.getElementById('root'));
+		
+WE SHOULD ALWAYS KEEP THE PACKAGES, FILES UPDATED.
+
+################
+create-react-app 2:
+
+It is an updated version of create-react-app 1. To see features of create-react-app 2, we will make a new file:
+>create-react-app newreact
+
+Now we will open newreact in sublime:
+It will have a new version of "react-scripts".
+
+To update react, we just have to goto package.json -> dependencies -> "react-scripts" and update it with the current version.
+and then in cmd prompt, in that project folder path run >npm install	#this will read the package.json file and update everything, using the react-scripts, 
+with the latest version. 
+We can update the react library also("react"), but it might break big projects.
+
+I deleted the newreact folder.
+
+################
+create-react-app 3:
+
+Now, create-react-app has an easier way of starting a new create react app projects.
+create-react-app has its own page now. 
+
+It uses:
+>npx create-react-app my-app-name #to create react apps
+We do not need to install create-react-app. We can simply use npx(it is a package runner tool that comes with npm 5.2 or higher)
+
+In the new version of create-react-app, in the /index.js file:
+	serviceWorker.unregister();		#serviceWorker is automatically unregistered, so that we dont automatically use the serviceWorker.js file untill we need to.
+
+Also, in /App.js file, App is a function and not a class:
+	function App() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<img src={logo} className="App-logo" alt="logo" />
+					<p>
+						Edit <code>src/App.js</code> and save to reload.
+					</p>
+					<a
+						className="App-link"
+						href="https://reactjs.org"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Learn React
+					</a>
+				</header>
+			</div>
+		);
+	}
+But, we will change it like the previous only:
+	class App extends React.Component {
+		render() {
+			return (...)		#... is the code in which changes are not made
+		}
+	}
+
+Now, if we save and run >npm start, everything shud still be running.
+
+###########################
+YOUR FIRST REACT COMPONENT:
+
+When we run the npm start cmnd, we see this:
+./src/index.js
+  Line 4:8:  'App' is defined but never used  no-unused-vars
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+ 
+So, in ./src/index.js:
+Comment import App from './App'; and save. 	#that line in cmd prompt will go.
+
+In ./src/index.js:
+import React from 'react'; is working bcz we have webpack under the React hood, which does all the bundling for us. So, we are allowed to use import
+
+import React from 'react';	#this is the main react library
+import ReactDOM from 'react-dom';	#but this can differ depending on the use. ReactDOM is used for manipulating DOM, ReactNative is used for mobile apps, etc
+import './index.css';	#React allows us to add css file, in each components, and those css files will only render styles to the components they are attached
+				to(./ means, its in the same dir)(as for app.js, we have app.css and index.js has index.css)
+// import App from './App';	#if it has no extension, then it just assumes it is js file
+import * as serviceWorker from './serviceWorker';	#it is a new feature, that allows our apps to become faster and perform offline
+ReactDOM.render(		#use ReactDOM package to use its render method
+  <React.StrictMode>
+    <h1>Hello World</h1>	#this will be rendered
+  </React.StrictMode>,
+  document.getElementById('root')
+);									#This whole thing is what React does.
+
+
+Before <h1>Hello World</h1>, it was <App />.
+Let's see the App.js code:
+	import React from 'react';			#In Andrei's video, this is written: import React, { Component } from 'react';
+	import logo from './logo.svg';
+	import './App.css';
+
+	class App extends React.Component {			#Component has a rule that it must render atleast something
+		render() {							#rendering, i.e, we are returning an HTML piece of the website
+			return (						#returning
+				<div className="App">
+					<header className="App-header">
+						<img src={logo} className="App-logo" alt="logo" />
+						<p>
+							Edit <code>src/App.js</code> and save to reload.
+						</p>
+						<a
+							className="App-link"
+							href="https://reactjs.org"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Learn React
+						</a>
+					</header>
+				</div>
+			)
+		}
+	}
+	
+	export default App;
+Therefore, we are just creating our own custom components that we can just add(like <App />)
+
+Now, we will create our own component in place of Hello World.
+	ReactDOM.render(<React.StrictMode><Hello /></React.StrictMode>, document.getElementById('root'));
+
+We will also import the Hello module from Hello.js		#we will create a new file named Hello.js
+In Hello.js:
+	import React, { Component } from 'react';	#{} this is called destructuring
+
+	class Hello extends Component {
+		render() {
+			return <h1>Hello World</h1>
+		}
+	}
+
+When we save this, we get error msg in command prompt:
+	Failed to compile.
+	./src/index.js
+	Attempted import error: './Hello' does not contain a default export (imported as 'Hello').
+This error is bcz, we are not exporting it. When we want other files to use this file, we need to export it. For exporting we use:
+export default name_of_class;		#default means we can export only one thing(the class given)
+
+So, in Hello.js add:
+	export default Hello;
+
+Now, when we save it, it runs on the browser.
+
+Now, we will add some more line in Hello.js:
+	<div>
+		return <h1>Hello World</h1>
+		<p>Welcome to React</p>
+	</div>
+
+When we save it, we get error msg in command prompt:
+	Failed to compile.
+	./src/Hello.js
+	Line 4:2:  Your render method should have return statement                        react/require-render-return
+	Line 5:3:  Expected an assignment or function call and instead saw an expression  no-unused-expressions
+This is because, we are giving multiple lines, and return is expecting a single line, so we need to wrap it up in a bracket.
+So:
+	class Hello extends Component {
+		render() {
+			return (
+				<div>
+					return <h1>Hello World</h1>
+					<p>Welcome to React</p>
+				</div>
+			);	
+		}
+	}
+And, now when we save it, it is running successfully.
+
+Now, we will create a Hello.css file and import it in Hello.js file:
+	import './Hello.css';
+
+In Hello.css:
+	h1{
+		background: red;
+	}
+When we save, we can see the changes in the browser.
+
+We will install tachyons package, is similar to bootstrap and which has predefined class names which we can add to components(in index.js file, at the name of
+things to be rendered). 
+In cmnd prompt:
+>robofriends>npm install tachyons
+When it is installed, we can check it in package.json
+
+Now, we will import tachyons in index.js file:
+	import 'tachyons';
+
+Since now we have, tachyons in index.js, in Hello.js, we can write:
+	<div class='f1 tc'>
+
+When we save this, we can see the changes in the browser, but when we inspect the console, we can see that it is showing error:
+	index.js:1 Warning: Invalid DOM property `class`. Did you mean `className`?
+So, in place of class, we will change to className:
+	<div className='f1 tc'>
+
+This part:
+	<div className='f1 tc'>
+		return <h1>Hello World</h1>
+		<p>Welcome to React</p>
+	</div>
+which we can see here, seems like HTML, but we are able to use it in JS. This is actually called JSX. Part of React is that it allows us to write this HTML
+like syntax.
+So, we might have some questions:
+1. Does it not break the rule of SEPARATION OF CONCERNS?
+	React has idea of components, so its better to have styles and functionalities per components so that each component is its separate universe and we just 
+	add these components. And in React, the components are concerned about themselves only and nothing else. 
+2. HOW ARE WE ABLE TO ADD HTML TO JS?
+	It is not actual HTML, they are JSX. React uses the JSX to create their virtual DOM that they built based on what we give to them, then they look at this
+	virtual DOM and the real DOM will say, that yes, this part is changed I am going to change the DOM now based on the virtual DOM. And this is why React is
+	really fast. They create these objects(JSX) which is really fast in JS and only changes what needs to be done in the DOM.
+
+Now, within the Hello component, i can add Props or Properties. These Props can be called anything(as HTML Attributes).
+	ReactDOM.render(<React.StrictMode><Hello greeting={'Hello' + 'React Ninja'}/></React.StrictMode>, document.getElementById('root'));
+								#<Hello greeting={'Hello' + 'React Ninja'}/>	inside {} we can write JS.
+When we save this, in the cmnd prompt, we get this warning:
+	./src/index.js
+	Line 16:60:  Unexpected string concatenation of literals  no-useless-concat	#as we can simply write Hello React Ninja together without +
+But as per now, it is fine. We can proceed like this also.
+
+So, now we can use this prop in Hello.js file:
+	<div className='f1 tc'>
+		return <h1>Hello World</h1>
+		<p>{this.props.greeting}</p>	#this object, iee. Hello, has properties(props) which is greeting
+	</div>
+When we save this, we can see the changes in the browser.
+
+This class is like function only:
+Class:	class Hello extends Component {
+			render() {
+				return (
+					<div className='f1 tc'>
+						return <h1>Hello World</h1>
+						<p>{this.props.greeting}</p>
+					</div>
+				);	
+			}
+		}
+Function: 	const Hello = (props) => {			#so, we are just creating functions(Hello) that take parameters(props) and these parameters which are given
+				return (					#by giving attributes and values(in Index.js) are just being rendered({props.greeting})
+					<div className='f1 tc'>
+						return <h1>Hello World</h1>
+						<p>{props.greeting}</p>
+					</div>
+				);	
+			}
+ 
+#############################################################################
+BUILDING A REACT APP 1:
+We will start building our ROBOFRIENDS app.
+To get started, we want to think about components again, that what kind of components we want.
+We will first start with the card component, as it is the smallest when we will make one card component, we can copy several others.
+
+We will start off clean, so will delete the Hello.csss and Hello.js files.
+We can also delete App.js and App.css App.test and logo file as we no longer need them. 
+
+We will start by building a Card component. In Index.js:
+	ReactDOM.render(<React.StrictMode><Card /></React.StrictMode>, document.getElementById('root'));
+
+We will create a Card.js file:
+	import React from 'react'
+
+	const Card = () => {		#() is empty as we dont have any property till now
+		return (
+			<div>				#we can return only one element, so we are returning only div element, which has a ton of things inside it. 
+				<img alt='robots' src='' />
+				<div>
+					<h2>Jane Doe</h2>				#as the card has name
+					<p>jane.doe@gmail.com</p>		#as the card has email address
+				</div>
+			</div>
+		);
+	}
+
+	export default Card;
+
+When we save this, we get the info on browser.
+
+For the images, we will use an API called robohash. It is in website form. In its URL: https://robohash.org, if we write anything after /, it wil give us a 
+new robo image. Eg: https://robohash.org/.asjxhGASKxb, etc.
+
+So, in Caed.js, we will give the following url:
+	<img alt='robots' src='https://robohash.org/test' />	
+
+We want the size to be small, so for that:
+	<img alt='robots' src='https://robohash.org/test?200x200' />	#?200x200 this we can do with https://robohash.org this URL only.
+
+Now, we have a single Card component, but we want to return multiple of them. So, we will just go inside Index.js:
+	ReactDOM.render(
+	<React.StrictMode>
+		<div>
+			<Card />	
+			<Card />
+			<Card />
+		</div>
+		
+	</React.StrictMode>, 
+	document.getElementById('root'));
+and when we save it, we will have 3 cards in the browser. 
+
+Now, we want to add some stylings to the cards. We will do this using tachyons in Card.js:
+	<div className='bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>
+		<img alt='robots' src='https://robohash.org/test?200x200' />
+		<div>
+			<h2>Jane Doe</h2>
+			<p>jane.doe@gmail.com</p>
+		</div>
+	</div>
+
+Now, we dont want every card to say the same name and email, we want them to be dynamic, so we will use Props.
+Andrei already made a robots.js file, from which we can use the names and emails, so I will download it, save it in the ./src folder then import it in Index.js
+file, as the robots.js file is already exported:
+	import { robots } from './robots';				#{ robots } destructuring it, so that if the robots.js file has another var say cats, we can easily use it,
+									#like: { robots, cats }
+The file is using export and not export default, so it can can export multiple things. So, the files which are default exported, we need to destructure them 
+while importing. 
+
+and now, we wil add props in the components in Index.js file:
+	<div>
+		<Card id={robots[0].id} name={robots[0].name} email={robots[0].email}/>	
+		<Card id={robots[1].id} name={robots[1].name} email={robots[1].email}/>
+		<Card id={robots[2].id} name={robots[2].name} email={robots[2].email}/>
+	</div>
+And in the Card.js file, we need to add prop:
+	const Card = (props) => {
+		return (
+			<div className='tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>
+				<img alt='robots' src='https://robohash.org/test?200x200' />
+				<div>
+					<h2>{props.name}</h2>		#{} will be used, as it is JSX
+					<p>{props.email}</p>
+				</div>
+			</div>
+		);
+	}
+
+We also passed id, so we can use id as well.
+In ESX section, we had template strings and bcz src is a template string, we have to wrap it in a {}. this becomes a JS expression. 
+and for getting robo images, instead of using test, we can eandomize it, by using ${} this syntax.
+	<img alt='robots' src={`https://robohash.org/${props.id}?200x200`} />
+
+When we save it, there will be a bit of delay as we are talking to the API and the API is returning images to us.
+
+This is nice:
+	const Card = (props) => {
+		return (
+			<div className='tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>
+				<img alt='robots' src={`https://robohash.org/${props.id}?200x200`} />
+				<div>
+					<h2>{props.name}</h2>
+					<p>{props.email}</p>
+				</div>
+			</div>
+		);
+	}
+But we can add destructuring as well:
+	const Card = (props) => {
+		const { name, email, id } = props;		#destructuring
+		return (
+			<div className='tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>
+				<img alt='robots' src={`https://robohash.org/${id}?200x200`} />
+				<div>
+					<h2>{name}</h2>
+					<p>{email}</p>
+				</div>
+			</div>
+		);
+	}
+
+Also, we can do destructuring within the parameters:
+	const Card = ({ name, email, id }) => {
+		return (
+			<div className='tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5'>
+				<img alt='robots' src={`https://robohash.org/${id}?200x200`} />
+				<div>
+					<h2>{name}</h2>
+					<p>{email}</p>
+				</div>
+			</div>
+		);
+	}
+
+###########################################################
+BUILDING A REACT APP 2:
+
+In Index.js, we did a lot of copy pasting.
+Also, in the dig of One Way Data Flow, we had one parent such as an app component, that had childeren who has their their own children and so on.
+So, using this knowledge, we can build a big app component that have different childeren so that we make each component small and reusable.
+
+So, in Index.js, we wil import a CardList component(and also create on CardList.js file), which is a parent of Card, which we will render instead of all the 
+previous cards(<Card id={robots[0].id} name={robots[0].name} email={robots[0].email}/>)
+
+So, in the CardList.js:
+	import React from 'react';
+	import Card from './Card';		#as we are using Card components
+
+	const CardList = () => {
+		return (
+			<div>
+				<Card id={robots[0].id} name={robots[0].name} email={robots[0].email}/>	
+				<Card id={robots[1].id} name={robots[1].name} email={robots[1].email}/>
+				<Card id={robots[2].id} name={robots[2].name} email={robots[2].email}/>
+			</div>
+		);
+
+	}
+
+	export default CardList;
+
+In Index.js:
+	import CardList from './CardList';	#we will import CardList and remove Card
+	
+	<React.StrictMode>
+		<CardList robots={ robots }/>	#also, we are making use of robots file, by using it as props
+	</React.StrictMode>, 
+
+So, in the CardList.js, we can mention robots in place of props:
+	const CardList = ({ robots }) => {
+		...
+	}
+
+But, we are using only 3 robots from robots.js file, so to use all 10 of them we will have to use looping:
+	import React from 'react';
+	import Card from './Card';
+
+	const CardList = ({ robots }) => {
+		const CardComponent = robots.map((user, i) => {			#mostly use map for looping, also map takes a parameter as i(index)
+			return <Card id={robots[i].id} name={robots[i].name} email={robots[i].email}/>	
+		});
+		
+		return (
+			<div>
+				{CardComponent}	#using {} as, it is a JS expression, a better name for CardComponent can be CardsArray
+			</div>
+		);
+
+	}
+
+	export default CardList;
+
+When we run save this, it is perfectly rendered in the browser. But when we open console in inspect, we get an eror:
+	index.js:1 Warning: Each child in a list should have a unique "key" prop.
+This is a special case, we have to remember this. When working with React, the way the Virtual DOM works is it keeps track of what all this cards are. And
+without having the key prop, if any card is deleted, React will not know which card is which and wil have to change the entire DOM VS if we had a key prop
+and any card gets removed, React will know, and it can remove just that from the DOM.
+So, whenever we are using loop, always we have to give a unique key. So:
+	return <Card key = {i} id={robots[i].id} name={robots[i].name} email={robots[i].email}/>	#we are giving key as i, which is index
+But, it is better to give key a value which do not change. Here, index can change, when cards are moved, so it can be better to give something unique like id.
+
+Instead of:
+	return (
+		<div>
+			{CardComponent}
+		</div>
+	);
+In place of CardComponent, we can place the entire thing and remove the CardComponent var:
+	import React from 'react';
+	import Card from './Card';
+
+	const CardList = ({ robots }) => {
+		return (
+			<div>
+				{
+					robots.map((user, i) => {
+						return (
+							<Card key = {i} 
+							id={robots[i].id} 
+							name={robots[i].name} 
+							email={robots[i].email}/>	
+						)	
+					})
+				}
+			</div>
+		);
+
+	}
+
+export default CardList;
+
+###########################################################
+BUILDING A REACT APP 3:
+
+So, now we have all the cards and now we need the Title and the Search Bar.
+
+In Index.js:
+We now know that we are really building an app now, so instead of having the CardList component, we can write it as App component(App will be the father of
+all our children/components).
+So, we will build the App.js file. In App.js:
+	import React from 'react';
+	import CardList from './CardList';
+	import { robots } from './robots';
+
+	const App = () => {
+		return (
+			<CardList robots={ robots }/>
+		);
+	}
+
+	export default App;
+
+In Index.js:
+	import React from 'react';
+	import ReactDOM from 'react-dom';
+	import './index.css';
+	import App from './App';
+	import * as serviceWorker from './serviceWorker';
+	import 'tachyons';
+
+	ReactDOM.render(
+		<React.StrictMode>
+			<App />
+		</React.StrictMode>, 
+		document.getElementById('root'));
+
+	// If you want your app to work offline and load faster, you can change
+	// unregister() to register() below. Note this comes with some pitfalls.
+	// Learn more about service workers: https://bit.ly/CRA-PWA
+	serviceWorker.unregister();
+
+Now, we will have the header:
+	const App = () => {
+		return (
+			<div>						#using div, as in return we need to wrap up everything as 1 single element
+				<h1>ROBOFRIENDS</h1>
+				<CardList robots={ robots }/>
+			</div>
+		);
+	}
+	
+Now, to add a Searchboxin the App, we will have to create a searchbox component.
+We will create a Searchbox.js file. In Searchbox.js:
+	import React from 'react';
+
+	const Searchbox = () => {
+		return (
+			<div className='pa2'> 
+				<input 
+					className='pa3 ba b--green bg-lightest-blue'
+					type='search' 
+					placeholder='search robots' 
+				/>
+			</div>
+		);
+	}
+
+	export default Searchbox;
+
+And in App.js:
+	const App = () => {
+		return (
+			<div className='tc'>	#so that everything is in the center
+				<h1>ROBOFRIENDS</h1>
+				<Searchbox />		#using the Searchbox component
+				<CardList robots={ robots }/>
+			</div>
+		);
+	}
+
+When we save this, everything works, but the Searchbox is not able to search anything. So, we need to make our static website interactive.
+In the App.js, we have Searchbox and CardList and these two need to communicate with each other.
+By looking in the One Way Data Flow dig, we can see, that, App has 2 children: Searchbox and CardList(CardList also has different children as Cards).
+So, in order that these two can communicate, it can be possible by one common source that is their father(App), ie. they need to send their info to their parent
+and the parent will them what to do.
+
+Untill now, we have not done something where two neighbours(CardList and Searchbox) had to communicate or transfer any sort of data.
+So to do so, React has STATE.
+We learned about PROPS, i.e. properties we keep passing down, but we never changed them, bcz React just reads the props that it receives and it just renders
+something. Props never change.
+
+But now we need a memory, we want Searchbox to communicate with Cards and also chage and modify accordingly. This is what STATE is in React.
+STATE simply means the desr of your apps. A state is simply an object that describes your application. State is able to change.
+And this State which describes our application is the robot and whatever is entered in the Searchbox.
+We are able to change value of Searchbox and we are able to change the robots, i.e. what is displayed. This is the rule, we will have to remember this.
+
+Props are simply things that come out of State.
+A parent feeds State into child component and as soon as the child component receives the state its a property. That child can never change its property.
+The parent just tells it what the State is, the child receives it as robots.
+
+So, first thing that we need to do is start using State in our app. The descr of what the State shud be. 
+So, lets just do a constant state now, in App.js:
+	const state = {
+		robots: robots,
+		searchfield: ''
+	}
+
+In order to use state, we have to go back to our original way we created the React component. We create a class:
+	class App extends React.Component {
+		render() {
+			return (
+			<div className='tc'>
+				<h1>ROBOFRIENDS</h1>
+				<Searchbox />
+				<CardList robots={ robots }/>
+			</div>
+		);	
+		}
+	}
+
+When we save it, no error comes. But it tells:
+	.src/App.js
+  Line 6:7:  'state' is assigned a value but never used		#as we have not yet used state
+  
+To add State, in React we use a construtor. So, in App.js:
+	import React from 'react';
+	import CardList from './CardList';
+	import Searchbox from './Searchbox';
+	import { robots } from './robots';
+
+	class App extends React.Component {
+		constructor() {
+			super()			#we use super(), bcz we are calling the constructor of Component
+			this.state = {	#state cannot change and they usually live in the parent component
+				robots: robots,
+				searchfield: ''
+			}
+		}
+		render() {
+			return (
+			<div className='tc'>
+				<h1>ROBOFRIENDS</h1>
+				<Searchbox />
+				<CardList robots={this.state.robots}/>
+			</div>
+		);	
+		}
+	}
+
+	export default App;
+
+As App now owns State, which has robot, it is now allowed to change.
+Now, to make them communicate:
+	we will make a user-defined method:
+		onSearchChange(event) {				#everytime the input changes, we get an event
+			console.log(event);		#anytime the input will change in Searchbox, event will console.logged
+		}
+
+		render() {
+			return (
+			<div className='tc'>
+				<h1>ROBOFRIENDS</h1>
+				<Searchbox searchChange=[this.onSearchChange]/>
+				<CardList robots={this.state.robots}/>
+			</div>
+		);	
+		}
+
+Now we will go to Searchbox.js:
+	import React from 'react';
+
+	const Searchbox = ({searchChange}) => {		#we are using destructuring here, it allows us to grab the props object and grab its properties
+		return (
+			<div className='pa2'> 
+				<input 
+					className='pa3 ba b--green bg-lightest-blue'
+					type='search' 
+					placeholder='search robots' 
+					onChange={searchChange}		#its an event, which listens to anytime the input changes
+				/>		
+			</div>
+			
+		);
+	}
+
+	export default Searchbox;
+we save this, and in the browser when we open the console in inspect, then when we type anything in the searchBox, we can see events in the console
+
+We need to alwsys remember, that with event, we always write:
+	onSearchChange(event) {
+		console.log(event.target.value);	#this gives us the value of the search term
+	}
+So, now when we type in the searchBox, we can notice the difference in the console
+
+We are saying that everytime the onChange event is triggered call the searchChange function. The searchChange function which is a prop is on the onSearchChange
+function that is defined in the app, that is how it is communicating with the parent. 
+And now, that we have the value of the search input, now we can directly communicate that search input in the robots list. 
+
+So, now we will create the robots list:
+	onSearchChange(event) {
+		const filteredRobots = this.state.robots.filter(robot => {
+			return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+		})
+		console.log(filteredRobots);
+	}
+we save this and when we search in the searchBox, we get an error(TypeError: Cannot read property 'state' of undefined).
+This error is very confusing. It is bcz the value of this, is not referring to App, bcz the event happened in the <input> in Searchbox.js, the value of this
+is <input> and input does not have state or robots. 
+ALWAYS KEEP THIS RULE IN MIND: anything that comes from React, like constructor and render are pre-built in react and any methods we built on components, uses 
+this syntax:
+	onSearchChange = (event) => {		#now value of this will be App
+		const filteredRobots = this.state.robots.filter(robot => {
+			return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+		})
+		console.log(filteredRobots);
+	}
+So, now when we enter anything in searchBox, it is showing 10 robots, it is not filtering anything, that is bcz my searchfield is always an empty string.
+So, in order to update state, another rule is to do:
+	this.setState([ searchfield: event.target.value ])	#we are changing the state, that the searchfield always gets updated
+So, now:
+	onSearchChange = (event) => {
+		this.setState({ searchfield: event.target.value })
+		const filteredRobots = this.state.robots.filter(robot => {
+			return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+		})
+		console.log(filteredRobots);
+	}
+and now when we save it, and search, we can see that everything is getting filtered.
+
+But still in the console, we can see that filteredRobots is not used. So what we can do is, change this.state.robots with filteredRobots.
+So:
+	import React from 'react';
+	import CardList from './CardList';
+	import Searchbox from './Searchbox';
+	import { robots } from './robots';
+
+	class App extends React.Component {
+		constructor() {
+			super()
+			this.state = {
+				robots: robots,
+				searchfield: ''
+			}
+		}
+
+		onSearchChange = (event) => {
+			this.setState({ searchfield: event.target.value  })
+		}
+
+		render() {
+			const filteredRobots = this.state.robots.filter(robot => {
+				return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+			})
+			return (
+			<div className='tc'>
+				<h1>ROBOFRIENDS</h1>
+				<Searchbox searchChange={this.onSearchChange}/>
+				<CardList robots={filteredRobots}/>
+			</div>
+		);	
+		}
+	}
+
+	export default App;
+
+And now when we save it, and search for a robot in searchBox, we get a robot.
+
+##################################################################
+STYLING YOUR REACT APP:
+Now, we will add some style.
+So, if we need to change the entire css of the app, we can use index.css.
+So, we will just put in the gradient that we want, so in index.css:
+	background: linear-gradient(to left, rgba(7, 27, 82, 1) 0%, rgba(0, 128, 128, 1) 100%);
+
+For the fonts:
+Google Sega logo font css(https://www.cufonfonts.com/font/sega-logo-font). This website has free fonts that we can use.
+I will download the font file, t has a .css file, which tells us what we can include.
+So, I will just copy the .css file and paste it for h1(ROBOFRIENDS), which will be in App.css(we will create an App.css file). In App.css file:
+	@font-face {
+	font-family: 'SEGA LOGO FONT';
+	font-style: normal;
+	font-weight: normal;
+	src: local('SEGA LOGO FONT'), url('SEGA.woff') format('woff');
+	}
+
+
+	h1 {
+		font-family: 'SEGA LOGO FONT';
+		font-weight: 200;
+		color: #0ccac4;
+	}
+Now, I will paste the .woff file in src folder.
+
+After saving, nothing will change, bcz in order to the css file to work, we will have to import it, so:
+	import './App.css';
+
+###########################################################
+BUILDING A REACT APP 4:
+
+Now we will do something advance. In real life, we will not be using the robots name file, we will be using an API. We want that when this website gets loaded,
+to make a request somewhere and grab these robots from a server. We can make use of JSONPlaceholder API.
+They have a really nice url, that we can use and they return whate we need(name, id and username). So, using it, we will make our app more realistic.
+
+The App component, is something what we call as a Smart component, unlike SearchBox and CardList that are pure functions. App.js actually has state, A piece of
+data that describes our App and bcz they have state, we call them smart component. Smart component has this class syntax:
+	class App extends React.Component {
+
+In real life, when we start,
+	robots: []	#robots will be an empty array bcz we have not grabbed the users
+
+So, if we save this, robots wont be dispalyed in the website untill we load the website and then as soon as the website gets loaded we ask for the users from
+somewhere(JSONPlaceholder) over the internet. 
+
+Also, React comes with few other things, inside components that we can use and they are called lifecycle methods(they are called lifecycle methods, bcz when we 
+include them, they will automatically get triggered when the website loads)
+We have 3 sections:
+ Mounting: Mounting is the start of the app, when we use mounting, the App component gets mounted in document with the id=root(in the index.html file, our 
+ webpage is nothing, but a div with an id of root, when we say we mount a component, we are replacing the div and adding the entire App component. In mounting,
+ these are the lifecycle hooks that get mounted:(they are in order)
+	constructor():first it checks, does this app has a constructor, yes, then run the piece of code inside constructor
+	componentWillMount(): does this app has a componentWillMount, no, then ignore it.
+	render(): does this app has a render(), yes, then run the piece of code inside constructor
+	componentDidMount(): does this app has a componentDidMount, no, then ignore it.
+ Updating: it runs, whenever a component changes
+ Unmounting: it runs, when a component is removed from the page
+These comes with react, and if we use them, they get called automatically.
+
+We will use componentDidMount(). This says taht yes, the app component is mounted on the webpage and its rendered. We can do that by:
+	componentDidMount() {
+		console.log('check');
+	}
+When we save this, in the console, check will be displayed. So, lets make the robots empty array and then setState in componentDidMount:
+	class App extends React.Component {
+	constructor() {
+		super()
+		this.state = {
+			robots: [],
+			searchfield: ''
+		}
+	}
+
+	componentDidMount() {
+		// console.log('check');
+		this.setState({ robots: robots });
+	}
+
+So, when we save this and refresh the browser,we will see this flow of execution:
+	constructor
+	render
+	componentDidMount
+	render		#bcz, in componentDidMount we are updated the state(setState), and in this, there is a render hook lifecycle is present so everytime the state
+			#changes, it will show render()
+
+So, bcz it goes from an empty array to a robots list, render gets rerun and the virtual DOM notices that there is a difference, and repaints our web browser
+to include the robots. 
+
+Now, instead of using a robots file, we will use the API to grab the data.
+We will delete import { robots } from './robots';  and make the following changes:
+	componentDidMount() {
+		fetch('https://jsonplaceholder.typicode.com/users')		#fetch is a method in window object. it is a tool that we use to make requests to servers
+		 .then(response => {
+			return response.json();
+		})
+		 .then(users => {
+		 	this.setState({ robots: users });
+		 })	
+	}
+now, when we save it and refresh the browser, then we will get the users/robots.
+And, if the website is slow in loading bcz of many users, then we can say that:
+	render() {
+		const filteredRobots = this.state.robots.filter(robot => {
+			return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+		})
+		if(this.state.robots.length === 0) {		#can also be written as if(!this.state.robots.length)
+			return  <h1>Loading</h1>
+		}
+		else {
+			return (
+				<div className='tc'>
+					<h1 className='f1'>ROBOFRIENDS</h1>
+					<Searchbox searchChange={this.onSearchChange}/>
+					<CardList robots={filteredRobots}/>
+				</div>
+			);	
+		}
+	}
+
+###########################################################
+BUILDING A REACT APP 5:
+
+There is an issue with the website. when we minimise it, and scroll down, then we loose the searchBox.
+We will create a scroll component/functionality which we will add around CardList.
+	<Scroll>
+		<CardList robots={filteredRobots}/>		#now, cardlist will be completely scrollable
+	</Scroll>
+
+So, we will create a Scroll,js file and import it in App.js:
+	import Scroll from './Scroll';
+
+Scroll is a wrapping component
+And now we will learn about children. Children is the CardList. Scroll can use children as a way to render its childeren(CardList).
+In Scroll.js:
+	import React from 'react';
+
+	const Scroll = (props) => {
+		return props.children	#though we have not given props this children, it will automatically render it bcz every props has children and this will
+	}					#the entire users on the page and in the console, we can see that children will have a Type: CardList
+
+	export default Scroll
+So, using props.children, we can create components that wrap other components.
+
+Also, using props.children, we can create a scrollable component.
+	const Scroll = (props) => {
+		return (
+			<div style={{ overflowY: 'scroll', border: '5px solid black', height: '500px'}}>#we can give style in here only using {{}} instead of using .css file
+				{props.children}
+			</div>
+		)
+	}
+
+ALL THE COMPONENTS ARE REUSABLE.
+
+###########################################################
+BUILDING A REACT APP 6:
+We have a lot of files in our project, we are going to clean it.
+We will create 2 folders in src: components(for the components/pure functions we built CardList, SearchBox and Scroll), containers(these are the smart components 
+that have state in them, lifecycle hooks, class syntax). containers are going to move down state to the components.
+So, App.js, app.css and the font file(SEGA.woff)we will move into containers and all the rest pure functions(SearchBox.js, Card.js, CardList.js, Scroll.js) into 
+components.
+Now, we will have many fails in the command prompt bcz SearchBox, CardList and Scroll lives in a diff folder.
+In App.js:
+	import CardList from '../components/CardList';		#.. means we are leaving the current folder
+	import Searchbox from '../components/Searchbox';
+	import Scroll from '../components/Scroll';
+In index.js:
+	import App from './containers/App';
+
+And now when we save it, everything runs the same way.
+
+And if we run:
+>npm run build 
+it wil will build the code and a new folder will be created by the name build, which will have all our files but in more concise way. Everythinhg wil be
+minified for us. AND NOW THIS BUILD FOLDER CAN BE DEPLOYED ANYWHERE. 
+
+#################################################################
+KEEPING YOUR PROJECTS UPTO DATE:
+
+In package.json, we need to update the dependencies and check for any vulnaribilities and fixing them, meanwhile making sure the website we made is running
+smoothly.
+Keeping the files in the projects uptodate, is the easiest way to secure them and prevent them from vulnaribilities.
+
+######################################################################
+ERROR BOUNDARY IN REACT:
+
+This works in REACT16 or higher.
+If some error occurs in the component, we dont want our website to break. We want the user to get some text or some UI, even though the component has some error.
+For this, we will use the error boundary in react.
+
+WE will make a new file in the components folder, named ErrorBoundary.js
+In ErrorBoundary.js:
+	import React, { Component } from 'react';
+
+	class ErrorBoundary extends Component {	#in this ErrorBoundary component, we can wrap any component(say CardList component and if the CardList component
+										#fails we can catch it in ErrorBoundary component)
+		constructor(props) {
+			super(props)
+			this.state = {
+				hasError: false
+			}
+
+		}
+now we will render:
+		render() {
+			if (this.state.hasError) {
+				return <h1>Ooooops. That is not good.</h1>		#h1 will be rendered if we get any error
+			}
+			return this.props.children	#else, children wil be rendered, children is anything that is between ErrorBoundary, in our case CardList
+		}
+	}
+
+To change hasError, we have a new React lifecycle hook called componentDidCatch.
+componentDidCatch is like Try Catch block in JS. If any thing errors out, it will run this lifecycle hook, and this lifecycle hook gets 2 parameters, i.e. 
+error and info. 
+	componentDidCatch() {
+		this.setState({ hasError: true })	#if there is error, hasError will become true, and if this is triggered, we will render the h1 tag
+	}
+	
+In App.js, we will import ErrorBoundary.js and we will use it for CardList:
+	<Scroll>
+		<ErrorBoundary>
+			<CardList robots={filteredRobots}/>
+		</ErrorBoundary>
+	</Scroll>
+
+ErrorBoundary is really helpful in Production.
+
+##########################################
+DEPLOYING OUR REACT APP:
+
